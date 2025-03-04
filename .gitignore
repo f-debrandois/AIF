@@ -1,1 +1,7 @@
-developpement/data/
+.vscode/
+.gradio/
+__pycache__/
+_build/
+
+data/
+runs/

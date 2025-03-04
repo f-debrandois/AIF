@@ -38,7 +38,7 @@ def train(net, optimizer, loader, epochs=5, writer=None):
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', type=str, default = '../data/landscapes', help='dataset path')
+    parser.add_argument('--data_path', type=str, default = '../../data/landscapes', help='dataset path')
     parser.add_argument('--batch_size', type=int, default = int(32), help='batch_size')
     parser.add_argument('--lr', type=float, default = float(1e-3), help='learning rate')
     parser.add_argument('--epochs', type=int, default = int(10), help='number of epochs')
@@ -78,4 +78,4 @@ if __name__=='__main__':
         writer.add_graph(unet, x.to(device))
         
     # Save model weights
-    torch.save(unet.state_dict(), 'unet.pth')
+    torch.save(unet.state_dict(), 'models/unet.pth')

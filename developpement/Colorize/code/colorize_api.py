@@ -9,9 +9,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 app = Flask(__name__)
 
-MODEL_PATH = '../models/unet.pth'  # You can change this path if necessary
+MODEL_PATH = 'models/unet.pth'  # You can change this path if necessary
 
-model = ...
+model = UNet().to(device)
 model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
 model.eval()
 
@@ -24,13 +24,13 @@ transform = transforms.Compose([
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    ...
-    ...
-    ...
-
-
+    # Get the image from the request
+    img = Image.open(io.BytesIO(request.data))
+    img = transform(img).unsqueeze(0).to(device)
+    
+    # Make the prediction
     with torch.no_grad():
-        outputs = model(...)
+        outputs = model(img)
 
     # Convert the prediction to a PIL Image
     pred_img = transforms.ToPILImage()(outputs.squeeze().cpu())
