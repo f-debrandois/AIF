@@ -1,0 +1,3 @@
+[submodule "Movie-Recommender"]
+	path = Movie-Recommender
+	url = https://github.com/f-debrandois/Movie-Recommender.git
