@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  colorize-api:
+    build:
+      context: ./code
+      dockerfile: Dockerfile.api
+    container_name: colorize-api
+    ports:
+      - "5000:5000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  colorize-webapp:
+    build:
+      context: ./code
+      dockerfile: Dockerfile.webapp
+    container_name: colorize-webapp
+    ports:
+      - "7860:7860"
+    depends_on:
+      - colorize-api
